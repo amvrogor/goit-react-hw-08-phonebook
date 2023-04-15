@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Formik, Field } from 'formik';
-import { validateSchema } from 'components/validateSchema';
+import * as Yup from 'yup';
 import { logIn } from 'redux/operations';
 
 import {
@@ -9,6 +9,15 @@ import {
   ErrorMessage,
   SubmitButton,
 } from './LoginForm.styled';
+
+const validationSchema = Yup.object({
+  email: Yup.string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: Yup.string('Enter your password')
+    .min(7, 'Password should be of minimum 7 characters length')
+    .required('Password is required'),
+});
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -19,7 +28,7 @@ export const LoginForm = () => {
         email: '',
         password: '',
       }}
-      validationSchema={validateSchema}
+      validationSchema={validationSchema}
       onSubmit={(values, actions) => {
         dispatch(
           logIn({

@@ -1,14 +1,15 @@
 const styles = {
   container: {
-    minHeight: 'calc(100vh - 50px)',
+    minHeight: 'calc(100vh - 300px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
-    fontWeight: 500,
+    fontWeight: 600,
     fontSize: 48,
     textAlign: 'center',
+    color: '#ee8905',
   },
 };
 

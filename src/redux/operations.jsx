@@ -109,7 +109,7 @@ export const changeContact = createAsyncThunk(
   'contacts/changeContact',
   async (contact, thunkAPI) => {
     try {
-      const response = await axios.put(`/contacts/${contact.id}`, {
+      const response = await axios.patch(`/contacts/${contact.id}`, {
         name: contact.name,
         number: contact.number,
       });

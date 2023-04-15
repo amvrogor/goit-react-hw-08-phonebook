@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { Formik, Field } from 'formik';
-import { validateSchema } from 'components/validateSchema';
+import { contactsValidationSchema } from 'components/contactsValidationSchema';
 import { addContact } from 'redux/operations';
 import { useContacts } from 'hooks';
 
@@ -21,7 +21,7 @@ export const ContactForm = () => {
         name: '',
         number: '',
       }}
-      validationSchema={validateSchema}
+      validationSchema={contactsValidationSchema}
       onSubmit={(values, actions) => {
         contacts.find(
           contact => contact.name.toLowerCase() === values.name.toLowerCase()

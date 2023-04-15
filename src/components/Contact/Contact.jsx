@@ -6,7 +6,7 @@ import { deleteContact, changeContact } from 'redux/operations';
 import { setIsChanged } from 'redux/isChangedSlice';
 import { useContacts, useIsChanged } from 'hooks';
 import { Formik, Field } from 'formik';
-import { validateSchema } from 'components/validateSchema';
+import { contactsValidationSchema } from 'components/contactsValidationSchema';
 import {
   ContactItem,
   ContactInfo,
@@ -29,12 +29,14 @@ export const Contact = ({ contact: { name, number, id } }) => {
       message: 'Are you sure?',
       buttons: [
         {
+          style: { backgroundColor: '#ee8905' },
           label: 'Yes',
           onClick: () => {
             dispatch(deleteContact(id));
           },
         },
         {
+          style: { backgroundColor: '#ee8905' },
           label: 'No',
           onClick: () => {},
         },
@@ -50,7 +52,7 @@ export const Contact = ({ contact: { name, number, id } }) => {
       <ContactInfo>
         <Name> {name}:</Name>
         <Number> {number}</Number>
-        <Button onClick={handleIsChanged}>Change</Button>
+        <Button onClick={handleIsChanged}>Edit</Button>
         <Button onClick={handleDelete}>Delete</Button>
       </ContactInfo>
       {isChanged.id === id && isChanged.value === true && (
@@ -60,7 +62,7 @@ export const Contact = ({ contact: { name, number, id } }) => {
             number,
             id,
           }}
-          validationSchema={validateSchema}
+          validationSchema={contactsValidationSchema}
           onSubmit={(values, actions) => {
             if (
               contacts
@@ -93,12 +95,12 @@ export const Contact = ({ contact: { name, number, id } }) => {
               <ErrorMessage name="number" component="span" />
             </FormField>
             <Buttons>
-              <Button type="submit">Change contact</Button>
+              <Button type="submit">Save contact</Button>
               <Button
                 type="button"
                 onClick={() => dispatch(setIsChanged(id, false))}
               >
-                Cancel changes
+                Cancel
               </Button>
             </Buttons>
           </Form>

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Formik, Field } from 'formik';
-import { validateSchema } from 'components/validateSchema';
+import * as Yup from 'yup';
 import { register } from 'redux/operations';
 
 import {
@@ -9,6 +9,21 @@ import {
   ErrorMessage,
   SubmitButton,
 } from './RegisterForm.styled';
+
+const validationSchema = Yup.object({
+  name: Yup.string()
+    .matches(
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+      "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+    )
+    .required('Name is required'),
+  email: Yup.string('Enter your email')
+    .email('Enter a valid email')
+    .required('Email is required'),
+  password: Yup.string('Enter your password')
+    .min(7, 'Password should be of minimum 7 characters length')
+    .required('Password is required'),
+});
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -20,7 +35,7 @@ export const RegisterForm = () => {
         email: '',
         password: '',
       }}
-      validationSchema={validateSchema}
+      validationSchema={validationSchema}
       onSubmit={(values, actions) => {
         console.log(values);
         dispatch(

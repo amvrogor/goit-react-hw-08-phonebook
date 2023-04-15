@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const validateSchema = Yup.object().shape({
+export const contactsValidationSchema = Yup.object().shape({
   name: Yup.string()
     .matches(
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
@@ -13,5 +13,4 @@ export const validateSchema = Yup.object().shape({
       'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
     )
     .required('Phone number is required'),
-  email: Yup.string().email('Invalid email address').required('Required'),
 });

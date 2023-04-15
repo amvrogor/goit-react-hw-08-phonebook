@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { ContactsList } from 'components/ContactsList/ContactsList';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { Filter } from '../components/Filter/Filter';
@@ -16,14 +16,14 @@ export default function Contacts() {
   }, [dispatch]);
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
-        <title>Your tasks</title>
+        <title>My contacts</title>
       </Helmet>
       <ContactForm />
       <Filter />
       <div>{isLoading && 'Request in progress...'}</div>
       <ContactsList />
-    </>
+    </HelmetProvider>
   );
 }
